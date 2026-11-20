@@ -1,0 +1,167 @@
+// --- [S1] VS Code Setup and First JavaScript Execution ---
+// The Week 10 alert demonstration is omitted here to keep later demos uninterrupted.
+
+// Difference between let and const
+let myName = "Pervaiz";
+console.log(myName);
+
+myName = "Samuel";
+console.log(myName);
+
+const birthYear = 2002;
+console.log(birthYear);
+
+
+// --- [S2] Debugging Basics and Control Flow Principles ---
+// Uncomment the lines below one by one to check the errors!
+
+// 1. ReferenceError (Variable name typo)
+// let favoriteColor = "Blue";
+// console.log(favouriteColor);
+
+// 2. ReferenceError (Missing quotes for a string)
+// let myCity = Seoul;
+// console.log(myCity);
+
+// 3. SyntaxError (Missing parenthesis)
+// console.log("Portfolio life granted!"
+
+
+// --- [S2] (Continued) Getting User Input (prompt) ---
+// let userName = prompt("What is your name?");
+// console.log("Welcome, " + userName + "!");
+
+
+// --- [S3] Welcome Message Coding and Logical Error Debugging ---
+// Get the current computer's hour
+let currentHour = new Date().getHours();
+console.log("The current hour is: " + currentHour);
+
+if (currentHour < 12) {
+    console.log("Good morning! Welcome to the portfolio.");
+} 
+else if (currentHour < 18) {
+    console.log("Good afternoon! Please look around the portfolio.");
+} 
+else {
+    console.log("Good evening! Thank you for visiting.");
+}
+
+
+// --- [S3] (Continued) Logical Error Debugging Examples ---
+// Uncomment the examples below to figure out what the problem is.
+
+// 1. Reversed condition order (Logical Error)
+/*
+let testHour = 10; // Assuming it's 10 AM
+if (testHour < 18) {
+    console.log("Good afternoon!"); // <-- This will be printed!
+} else if (testHour < 12) {
+    console.log("Good morning!");
+} else {
+    console.log("Good evening!");
+}
+*/
+
+// 2. Incorrect use of Logical Operators (|| and &&)
+/*
+let isWeekend = true;
+let testHour2 = 10;
+
+// Incorrect example (Using OR)
+if (isWeekend || testHour2 < 12) {
+    console.log("[Incorrect Result] A weekend morning has dawned! Are you resting well?");
+}
+
+// Correct example (Using AND)
+if (isWeekend && testHour2 < 12) {
+    console.log("[Correct Result] A weekend morning has dawned! Are you resting well?");
+}
+*/
+
+
+// Week 11: add DOM events without removing the Week 10 greeting.
+// 1. Find the red button element.
+let myButton = document.querySelector("#theme-btn");
+
+// 2. Also find the body tag element. (for theme switching)
+let bodyElement = document.querySelector("body");
+
+// Midpoint check: verify in the console if the elements were found correctly.
+console.log("Button object: ", myButton);
+
+// 3. Hire a guard (addEventListener) to listen for click events on the button.
+myButton.addEventListener("click", function () {
+    // Print a log to the console when the button is clicked
+    console.log("Theme switch button clicked!");
+
+    // Use classList.toggle() to attach and detach the dark mode class.
+    bodyElement.classList.toggle("dark-mode");
+
+    // Change the button text according to the situation.
+    if (bodyElement.classList.contains("dark-mode")) {
+        myButton.textContent = "Switch to Light Mode";
+    } else {
+        myButton.textContent = "Switch to Dark Mode";
+    }
+});
+
+// [S1] querySelector style change demo
+// Example of changing the color of the h1 tag to blue
+// let titleElement = document.querySelector("#main-title");
+// titleElement.style.color = "blue";
+
+
+// Week 12: add arrays and loops while retaining earlier features.
+// ==========================================
+// [S1 & S2 Demo] Array and Loop
+// ==========================================
+
+//  Create an array of hobbies
+const hobbies = ['Coding', 'Gaming', 'Music', 'Drawing'];
+const listContainer = document.getElementById('hobby-list');
+const ul = document.createElement('ul');
+
+for (let i = 0; i < hobbies.length; i++) {
+  const li = document.createElement('li');
+  li.textContent = hobbies[i];
+  ul.appendChild(li);
+}
+
+listContainer.appendChild(ul);
+
+
+// ==========================================
+// [S3 Demo] Hobby Gallery Image Slider
+// ==========================================
+
+// 1. Array of images (using real, beautiful photos from picsum)
+let images = [
+    "https://picsum.photos/id/1018/400/250", // Nature
+    "https://picsum.photos/id/1015/400/250", // River/Mountain
+    "https://picsum.photos/id/1016/400/250"  // Canyon
+];
+
+// 2. Current index variable
+let currentIndex = 0;
+
+// 3. Select DOM elements
+const galleryImage = document.querySelector("#gallery-img");
+const nextButton = document.querySelector("#next-btn");
+
+// 4. Add Event Listener to button
+nextButton.addEventListener("click", function() {
+    // Increase index by 1
+    currentIndex = currentIndex + 1;
+    
+    // Debugging: check the current index in console
+    console.log("Current Index:", currentIndex);
+    
+    // Prevent 'undefined' error by resetting index to 0 if it exceeds the array bounds
+    if (currentIndex === images.length) {
+        currentIndex = 0;
+    }
+    
+    // Change the image source
+    galleryImage.src = images[currentIndex];
+});
